@@ -27,7 +27,8 @@ d = path.dirname(__file__)
 image = np.array(Image.open(path.join(d, 'twitter.png')))
 image_colors = ImageColorGenerator(image)
 image_mask = np.array(Image.open(path.join(d, 'twitter_mask.png')))
-font_path = path.join(d, 'fonts', 'OpenSansEmoji', 'OpenSansEmoji.ttf')
+font_path = path.join(
+    path.dirname(d), 'fonts', 'OpenSansEmoji', 'OpenSansEmoji.ttf')
 
 
 def get_parser():
