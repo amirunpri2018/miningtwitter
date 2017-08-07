@@ -8,6 +8,7 @@ import json
 import string
 import numpy as np
 import matplotlib.pyplot as plt
+import gc
 
 
 from nltk.tokenize import TweetTokenizer
@@ -59,10 +60,33 @@ class MyListener(StreamListener):
     def __init__(self, query):
         self.query = query
 
+        self.user_map = Basemap(
+            projection='merc',
+            llcrnrlat=-80,
+            urcrnrlat=80,
+            llcrnrlon=-180,
+            urcrnrlon=180,
+            lat_ts=20,
+            resolution='c')
+        self.user_map.drawcoastlines()
+        self.user_map.fillcontinents(color='coral', lake_color='aqua')
+        self.user_map.drawmapboundary(fill_color='aqua')
+        plt.ion()
+        plt.title("Users tweeting " + ''.join(query))
+        plt.show()
+
     def on_data(self, data):
         tweet = MyTweet(data)
+        print(tweet.tweet['coordinates'])
         if tweet.tweet['coordinates']:
             print(tweet.tweet['coordinates'])
+            coordinates = tweet.tweet['coordinates']['coordinates']
+            x, y = self.user_map(*coordinates)
+            self.user_map.plot(
+                x, y, marker='o', color='yellow', markeredgecolor='k', markersize=15)
+            plt.draw()
+            plt.pause(0.01)
+            plt.savefig('plot.png')
         return True
 
 
@@ -71,17 +95,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
     query = [args.query]
     auth = twitter_client.get_twitter_auth()
-    stream = Stream(auth, MyListener(query))
+    stream = Stream(auth, MyListener(query), async=True)
     stream.filter(track=query)
-
-
-
-
-
-
-
-
-
-
-
-
