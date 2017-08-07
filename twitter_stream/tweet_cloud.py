@@ -24,7 +24,7 @@ stopwords = list(STOPWORDS) + \
 
 d = path.dirname(__file__)
 
-image = np.array(Image.open(path.join(d, 'sncf.png')))
+image = np.array(Image.open(path.join(d, 'twitter.png')))
 image_colors = ImageColorGenerator(image)
 image_mask = np.array(Image.open(path.join(d, 'twitter_mask.png')))
 font_path = path.join(d, 'fonts', 'OpenSansEmoji', 'OpenSansEmoji.ttf')
@@ -61,7 +61,7 @@ class MyTweet():
                 term for term in terms if term not in stopwords and
                 term not in punctuation and
                 not term.startswith(('@', '#', 'https')) and
-                not term.lower() == query.lower()]
+                not any([term.lower() == x.lower() for x in query])]
         else:
             terms_filtered = terms
         return terms_filtered
