@@ -72,7 +72,7 @@ class MyListener(StreamListener):
         self.user_map.fillcontinents(color='coral', lake_color='aqua')
         self.user_map.drawmapboundary(fill_color='aqua')
         plt.ion()
-        plt.title("Users tweeting " + ''.join(query))
+        plt.title("Users tweets about " + ''.join(query))
         plt.show()
 
     def on_data(self, data):
@@ -83,7 +83,11 @@ class MyListener(StreamListener):
             coordinates = tweet.tweet['coordinates']['coordinates']
             x, y = self.user_map(*coordinates)
             self.user_map.plot(
-                x, y, marker='o', color='yellow', markeredgecolor='k', markersize=15)
+                x, y,
+                marker='o',
+                color='yellow',
+                markeredgecolor='k',
+                markersize=12)
             plt.draw()
             plt.pause(0.01)
             plt.savefig('plot.png')
