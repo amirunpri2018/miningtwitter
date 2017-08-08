@@ -18,6 +18,7 @@ __MACOSX
 Icon?
 ehthumbs.db
 Thumbs.db
+__*
 
 **.ipynb_checkpoints
 twitter_notebook.ipynb

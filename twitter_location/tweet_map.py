@@ -76,9 +76,10 @@ class MyListener(StreamListener):
 
     def on_data(self, data):
         tweet = MyTweet(data)
-        print(tweet.tweet['coordinates'])
-        if tweet.tweet['coordinates']:
+        try:
+            tweet.tweet['coordinates']
             print(tweet.tweet['coordinates'])
+            print(tweet.tweet['text'])
             coordinates = tweet.tweet['coordinates']['coordinates']
             x, y = self.user_map(*coordinates)
             self.user_map.plot(
@@ -89,6 +90,8 @@ class MyListener(StreamListener):
                 markersize=12)
             plt.draw()
             plt.pause(0.01)
+        except:
+            pass
         return True
 
 
