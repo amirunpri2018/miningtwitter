@@ -21,7 +21,10 @@ Thumbs.db
 __*
 
 */.ipynb_checkpoints
+<<<<<<< HEAD
 *.ipynb_checkpoints
+=======
+.ipynb_checkpoints
 twitter_notebook.ipynb
 config*
 config.py

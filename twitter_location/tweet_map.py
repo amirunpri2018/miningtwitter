@@ -6,12 +6,8 @@ import argparse
 import twitter_client
 import json
 import string
-import numpy as np
 import matplotlib.pyplot as plt
 
-
-from nltk.tokenize import TweetTokenizer
-from nltk.corpus import stopwords
 
 punctuation = list(string.punctuation)
 
@@ -36,21 +32,13 @@ class MyTweet():
             print("Error on_data: %s" % str(e))
             time.sleep(5)
 
-    def tokenize(self):
-        tknz = TweetTokenizer()
-        terms = tknz.tokenize(self.tweet['text'])
-        return terms
-
-    def terms_filter(self, terms, strainer='only'):
-        if strainer == 'only':
-            terms_filtered = [
-                term for term in terms if term not in stopwords and
-                term not in punctuation and
-                not term.startswith(('@', '#', 'https')) and
-                not term.lower() == query.lower()]
-        else:
-            terms_filtered = terms
-        return terms_filtered
+    def get_coordinates(self):
+        coordinates = None
+        try:
+            coordinates = self.tweet['coordinates']
+        except:
+            pass
+        return coordinates
 
 
 class MyListener(StreamListener):
@@ -77,19 +65,17 @@ class MyListener(StreamListener):
     def on_data(self, data):
         tweet = MyTweet(data)
         try:
-            tweet.tweet['coordinates']
-            print(tweet.tweet['coordinates'])
-            print(tweet.tweet['text'])
-            coordinates = tweet.tweet['coordinates']['coordinates']
-            x, y = self.user_map(*coordinates)
-            self.user_map.plot(
-                x, y,
-                marker='o',
-                color='yellow',
-                markeredgecolor='k',
-                markersize=12)
-            plt.draw()
-            plt.pause(0.01)
+            coordinates = tweet.get_coordinates()
+            if coordinates:
+                x, y = self.user_map(*coordinates)
+                self.user_map.plot(
+                    x, y,
+                    marker='o',
+                    color='yellow',
+                    markeredgecolor='k',
+                    markersize=12)
+                plt.draw()
+                plt.pause(0.01)
         except:
             pass
         return True
