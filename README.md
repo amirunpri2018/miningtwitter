@@ -36,7 +36,9 @@ Notes :
 
 #### Examples
 
+Query = 'orange'
 
+[twitter_cloud/examples][orange]
 
 ### Tweet Locator
 
@@ -46,9 +48,9 @@ In the 'twitter_location' directory, run the following command in a terminal:
 
 #### Examples
 
+Query = 'lol
 
-
-
+[twitter_location/examples][lol]
 
 
 
