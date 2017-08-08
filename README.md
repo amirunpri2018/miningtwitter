@@ -1,5 +1,7 @@
 # miningtwitter
-Multiple functionalities for Twitter Analysis
+Multiple visualization tools for Twitter Analysis.
+
+miningtwitter supports for now a wordcloud generator and a locator.
 
 ## Installation
 
