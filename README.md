@@ -38,7 +38,7 @@ Notes :
 
 Query = 'orange'
 
-[twitter_cloud/examples][orange]
+![Orange](twitter_cloud/examples/orange.png)
 
 ### Tweet Locator
 
@@ -50,7 +50,7 @@ In the 'twitter_location' directory, run the following command in a terminal:
 
 Query = 'lol
 
-[twitter_location/examples][lol]
+![Lol](twitter_location/examples/lol.png)
 
 
 
