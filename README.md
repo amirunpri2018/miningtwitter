@@ -48,9 +48,9 @@ In the 'twitter_location' directory, run the following command in a terminal:
 
 #### Examples
 
-Query = 'lol
+Query = 'orange'
 
-![Lol](twitter_location/examples/lol.png)
+![Orange](twitter_location/examples/lol.png)
 
 
 
